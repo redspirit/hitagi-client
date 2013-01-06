@@ -1,0 +1,77 @@
+*{
+	padding:0;
+	margin:0;
+}
+html{
+	font-size:14px;
+	font-family: verdana;
+}
+#chat{
+	text-align:center;
+	display:none;	
+}
+#users{
+	display:none;
+}
+#status{
+	display:none;
+}
+#login{
+	text-align:center;
+}
+.menu{
+	height:30px;
+	border-bottom:1px solid blue;
+	padding-top:5px;
+}
+#pane{
+	padding:3px;
+	text-align:left;
+	min-height:250px;
+}
+#sending{
+	border-top:1px solid red;
+}
+#message{
+	width:100%;
+	border:0;
+	height:20px;
+}
+
+span.time{
+	color:gray;
+	font-size:13px;
+}
+.menuBtn{
+	width:30%;
+	height:28px;
+}
+p.ulogo{
+	font-size:30px;
+	padding-top:15px;
+}
+#loginfo{
+	color:red;
+}
+#login img{
+	height:166px;
+	width:200px;
+}
+#logform span{
+	color:gray;
+	font-style: italic;
+}
+#logform input{
+	width:80%;
+	margin:5px;
+	padding:2px;
+	font-size:16px;
+}
+.avr{
+	width:120px;
+	text-align:center;
+}
+.sml{
+	max-width:32px;
+	max-height:32px;
+}
