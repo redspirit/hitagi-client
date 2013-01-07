@@ -859,7 +859,7 @@ function messageAfterProc(s){
 			s.text = tpl('image', {url1:c, url2:b});
 		});
 	} else {
-		s.text = s.text.replace(RegExp('(https?://)([-a-zA-Zа-яА-Я0-9@:;%!_\+.,~#?&//=]+)', 'gi'),function(link){
+		s.text = s.text.replace(RegExp('(https?://)([-a-zA-Zа-яА-Я0-9@:;%!_\+.,~#?&//=/(/)]+)', 'gi'),function(link){
 			var m=link.match(RegExp('(http://(www.)?youtube.com/)|(\.(jpg|jpeg|gif|png)$)', 'i'));
 			if(!m){
 				return '<a href="'+link+'" target="_blank">'+link+'</a>';
