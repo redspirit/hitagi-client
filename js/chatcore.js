@@ -1,5 +1,5 @@
 var states = [], statesT = [], privas = [], privasT = [], umItems = [];
-var blockOverlay = true, clickOnProf = 0;
+var blockOverlay = true, clickOnProf = 0, autoScroll = true;
 var soundEnable, notifEnable, playSound, imaga, blockHide = true;
 var imageReader = new FileReader();
 var user, rooms = {}, vkmid, vkrealname, vkurl, curColor, isFocus=true;
@@ -119,6 +119,9 @@ function bindings(){
 	$('.stateitem').click(clickStateitem);
 	$('.smiletabs').click(function(){return false});
 	$('.smiletabs div').click(clickSmiletab);
+	$('#mess1').scroll(function(){ // block auto scrolling
+		if(this.offsetHeight+this.scrollTop >= this.scrollHeight) autoScroll = true; else autoScroll = false;
+	});	
 	$(window).focus(function(){
 		isFocus = true;
 		$('#messageinput').focus();
@@ -128,6 +131,8 @@ function bindings(){
 	for(var i in smiles[1]){
 		$('#smWrap').append('<img num="'+smiles[1][i]+'" src="img/smiles/'+smiles[1][i]+'.gif" alt="" />');
 	}	
+	
+	
 }
 
 
@@ -736,7 +741,8 @@ function showNotificator(mes, time){
 	}, time);
 }
 function toBottom(){
-	document.getElementById('mess1').scrollTop = document.getElementById('mess1').scrollHeight;
+	var pan = document.getElementById('mess1');
+	if(autoScroll) pan.scrollTop = pan.scrollHeight;
 }
 function getUserItemHTML(name, nick, avaurl, status, priv, state){
 	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privas[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state]});
