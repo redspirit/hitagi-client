@@ -1,4 +1,4 @@
-var states = [], statesT = [], privas = [], privasT = [], umItems = [];
+var states = [], statesT = [], privas = [], privasS = [], privasT = [], umItems = [];
 var blockOverlay = true, clickOnProf = 0, autoScroll = true;
 var soundEnable, notifEnable, playSound, imaga, blockHide = true;
 var imageReader = new FileReader();
@@ -280,7 +280,7 @@ ch.response.onEraseMessage = function(err, d){
 }
 ch.response.onSetStatus = function(err, d){
 	if(!err){
-		$('.roster-pane table[user='+d.user+'] .ustatus').text(d.text);
+        $('.roster-pane table[user='+d.user+'] .statetxt').html(d.text);
 		addNotif('<b>'+d.nick+'</b> изменил статусный текст на: <b>' + d.text + '</b>', '#0F419B');
 		hideForm();
 	} else {
@@ -290,7 +290,6 @@ ch.response.onSetStatus = function(err, d){
 ch.response.onSetState = function(err, d){
 	if(!err){
 		$('.roster-pane table[user='+d.user+'] .stateSign').attr('src', 'img/'+states[d.val]);
-		$('.roster-pane table[user='+d.user+'] .statetxt').html(statesT[d.val]);		
 		if(d.user == user.login)$('#stateBtn').css('backgroundImage', 'url(img/'+states[d.val]+')');
 		addNotif('<b>'+d.nick+'</b> изменил статус на: <b>' + statesT[d.val] + '</b>', '#0F419B');
 	} else {
@@ -745,7 +744,13 @@ function toBottom(){
 	if(autoScroll) pan.scrollTop = pan.scrollHeight;
 }
 function getUserItemHTML(name, nick, avaurl, status, priv, state){
-	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privas[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state]});
+    var usericon = '';
+
+    if ('' != privas[priv]) {
+        usericon = '<img class="usericon" src="img/' + privas[priv] +'" alt="" title="" />';
+    }
+
+	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privasS[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state], usericon: usericon});
 }
 function addUser(name, uobj){
 	$('.roster-pane').append(getUserItemHTML(name, uobj['nick'], uobj['avaurl'], uobj['statustext'], uobj['commonPriv'], uobj['state']));
@@ -925,7 +930,7 @@ var templates = {
 	kickmes: '<div style="text-align:center;margin:20px 100px"><img src="img/kick.jpg" alt="" /><p>Уважаемый пользователь, Вас выпнули (кикнули) из этой комнаты. Это сделал модератор у которого, скорее всего, были для этого веские причины.</p><p><b>НАПОМИНАЕМ ВАМ о <a target="_blank" href="http://anime-storage.ru/index.php?topic=544.0">ПРАВИЛАХ</a> чата!</b></p><p>Если Ваше отношение к чату и его пользователям не изменится в лучшую сторону, то дело может дойти акта банного изгнания.</p></div>',
 	banmes: '<div style="text-align:center;margin:20px 100px"><img src="img/banned.jpg" alt="" /> <p><b>Вы забанены в этой комнате на {time} мин. {reason}</b></p><p>Вы себя вели настолько неуважительно к чату и его пользователям, что теперь читаете эти строки без права зайти в комнату еще {time} мин. Какого хрена? Будет время - <a target="_blank" href="http://anime-storage.ru/index.php?topic=544.0">почитайте правила</a>, они очень простые и основаны на самом обычном взаимном уважении между людьми. Если вы принципиально считаете себя выше всех, то лучше сюда не возвращаться.</p></div>',
 	blockmes: '<div style="text-align:center;margin:20px 100px"><img src="img/blocked.jpg" alt="" /> <p><b>Вы заблокированы, причина блокировки: "{mess}"</b></p></div>',
-	useritem: '<table user="{name}" class="user"><tr><td rowspan="2" scope="col" class="cc1"><img class="profava" src="{url}" alt="" nn={n} /></td><td scope="col" style="padding-top:6px"><img class="stateSign" src="img/{states}" alt="" /> <div class="statetxt">{statest}</div></td></tr><tr><td class="cc2"><img class="upriv" title="{pt}" src="img/{p}" alt="" /> <div class="usmenu" priv="{priv}"></div></td></tr><tr><td colspan="2" class="cc3"><div class="profnick" title="Юзер: {name}">{n}</div><div class="ustatus">{st}</div></td></tr></table>',
+	useritem: '<table user="{name}" class="user"><tr><td rowspan="2" scope="col" class="cc1">{usericon}<img class="profava" src="{url}" alt="" nn={n} /></td><td scope="col" style="padding-top:6px"></td></tr><tr><td class="cc2"><img class="stateSign" src="img/{states}" alt="{statest}" title="{statest}" /><div class="profnick {p}" title="Юзер: {name}">{n}</div><div class="clear"></div><div class="statetxt">{st}</div><div class="clear"></div></td></tr><tr><td colspan="2" class="cc3"><div class="usmenu" priv="{priv}">Действия</div></td></tr></table>',
 	image: '<div class="imgcont"><a target="_blank" href="{url2}"><img class="inlinepic" src="{url1}" alt="" /></a><div class="imgpanel"><img title="Мне не нравится" class="imgcontol iDislike" src="img/dislikeimg.png" alt="" /><img title="Закрыть картинку" class="imgcontol iClose" src="img/closeimg.png" alt="" /><img title="Мне нравится" class="imgcontol iLike" src="img/likeimg.png" alt="" /></div></div>',
 	vrnotif: 'Регистрация прошла успешно, теперь просто залогинтесь через ВК',
 	simpimage: '<a target="_blank" href="{url2}"><img class="inlinepic" src="{url1}" alt="" /></a>',
@@ -959,11 +964,11 @@ states[11] = 'home.png';		statesT[11] = 'Дела по дому';
 states[12] = 'read.png';		statesT[12] = 'Читаю';
 states[13] = 'sleep.png';		statesT[13] = 'Сплю';
 
-privas[1] = 'admin.png'; 		privasT[1] = 'Админ'; 
-privas[2] = 'moder.png'; 		privasT[2] = 'Модератор';
-privas[3] = 'owner.png'; 		privasT[3] = 'Хозяин комнаты'; 
-privas[4] = 'user.png'; 		privasT[4] = 'Пользователь'; 
-privas[5] = 'novoice.png';		privasT[5] = 'Без голоса';
+privas[1] = 'admin.png'; 		privasS[1] = 'admin';       privasT[1] = 'Админ';
+privas[2] = 'moder.png'; 		privasS[1] = 'moder';       privasT[2] = 'Модератор';
+privas[3] = 'owner.png'; 		privasS[1] = 'owner';       privasT[3] = 'Хозяин комнаты';
+privas[4] = ''; 	            privasS[1] = 'user';        privasT[4] = 'Пользователь';
+privas[5] = 'novoice.png';		privasS[1] = 'novoice';     privasT[5] = 'Без голоса';
 
 umItems[1] = 'Сделать админом';
 umItems[2] = 'Разжаловать админа';
