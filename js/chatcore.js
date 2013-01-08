@@ -405,6 +405,14 @@ $('.profava').live('click', function(){
 $('.close-form img').live('click', function(){
 	hideForm();
 });
+$('input[fastaction]').live('keydown', function(e){
+	if(e.keyCode==13){
+		var elemId = $(this).attr('fastaction');
+		$('#'+elemId).trigger('click');
+	}
+});	
+	
+	
 	
 /********** INTERFACE EVENTS ************/
 
@@ -640,6 +648,7 @@ function hideForm(){
 	if(blockOverlay) return false;
 	$('#alert').hide();
 	$('#overlay').hide();
+	$('#messageinput').focus();
 }
 function uplAvatar(file){
 	if (!file.type.match(/image.*/)) return true;
@@ -911,7 +920,7 @@ function messageAfterProc(s){
 /********** TEMPLATES ************/
 var templates = {
 	setava: '<div><img id="newavaimg" src="{src}" alt="" /></div><div><input type="file" name="files" id="inputfile" /></div><div id="avalabel">Выберите файл с картинкой. GIF анимироваться не будет</div>',
-	status: '<div><input type="text" id="newstatustext" style="width:400px;" value="" /></div><input type="button" id="status_but" class="btn" value="Изменить" />',
+	status: '<div><input type="text" id="newstatustext" style="width:400px;" value="" fastaction="status_but" /></div><input type="button" id="status_but" class="btn" value="Изменить" />',
 	modmenu: '<div class="moditem" val="1">Список забаненых</div><div class="moditem" val="2">Зарегать юзера</div><div class="moditem" val="3">Топик комнаты</div>',
 	topic: '<div><textarea style="width:300px; height:80px;" id="topictext">{txt}</textarea></div><input type="button" id="topic_but" class="btn" value="Изменить" />',
 	auth: '<div>Логин: <input type="text" id="auth_login" /></div><div>Пароль: <input type="password" id="auth_pass" /></div><div><input type="button" id="auth_but" class="btn" value="Войти" /></div><div align="center"><div id="vk_auth"></div></div><a id="reglink" href="#">Регистрация</a>',
