@@ -402,7 +402,9 @@ $('.profava').live('click', function(){
 		$('#messageinput').val($('#messageinput').val()+nn+': ').focus();
 	}
 });
-
+$('.close-form img').live('click', function(){
+	hideForm();
+});
 	
 /********** INTERFACE EVENTS ************/
 
@@ -631,7 +633,7 @@ function tpl(tname, variables){
 }
 function showForm(s,capt, top){
 	if(!isset(top)) top='200px';
-	$('#alert').html('<h1>'+capt+'</h1> '+s).css('top', top).show();
+	$('#alert').html('<div class="close-form"><img title="Закрыть" src="img/close-form.png" alt="" /></div><h1>'+capt+'</h1> '+s).css('top', top).show();
 	$('#overlay').show();
 }
 function hideForm(){

@@ -389,6 +389,11 @@ dd span.label{
 #alert input[type=text], #alert input[type=password]{
 	padding:2px;
 }
+#alert .close-form{
+	float:right;
+	margin:0;
+	cursor:pointer;
+}
 #overlay{
 	position: fixed;
 	z-index: 9;
