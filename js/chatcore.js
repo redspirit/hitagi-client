@@ -34,14 +34,14 @@ function createElements(){
 		id:'help',
 		content:tpl('rules')
 	});
-	$('#widget-radio').widget({
+	/*$('#widget-radio').widget({
 		hideCloseBtn:false,
 		title:'Аниме радио',
 		x:$('#cont').width()-570,
 		y:119,
 		id:'radio',
 		content:tpl('radiocode')
-	});	
+	});	*/
 	
 }
 

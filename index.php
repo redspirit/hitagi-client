@@ -9,7 +9,8 @@
 <title>Hitagi Chat</title>
 	<link rel="stylesheet" type="text/css" href="css/mark.css?<?php echo time(); ?>" />
 	<link rel="stylesheet" media="screen" type="text/css" href="js/colorpicker/css/colorpicker.css" />
-	<script src="http://<?php echo $serverip; ?>:8080/socket.io/socket.io.js"></script>
+<!--	<script src="http://<?php echo $serverip; ?>:8080/socket.io/socket.io.js"></script> -->
+	<script type="text/javascript" src="js/socket.io.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/hitagi.js?<?php echo time(); ?>"></script>
 	<script type="text/javascript" src="js/tools.js?<?php echo time(); ?>"></script>
@@ -19,7 +20,7 @@
 	var serverIp = '<?php echo $serverip; ?>';
 	var VKAPIID = <?php echo $VKAPIID; ?>;
 	var currentRoom = 'public';
-	soundManager.url = '/chat/sounds/soundmanager2.swf';
+	soundManager.url = '/hitagi-client/sounds/soundmanager2.swf';
 	var ch = hitagiCreate(serverIp, 8080);
 
 </script>	
