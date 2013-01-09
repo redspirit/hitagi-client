@@ -29,7 +29,7 @@
 <body>
 <div id="head">
 	<div id="logo">
-		<h1><a target="_blank" href="/">Аниме чат</a></h1>
+		<h1><a target="_blank" href="http://aniavatars.com/">Аниме аватарки</a></h1>
   	</div>
 	<div id="usefullinks">
 		<ul>
