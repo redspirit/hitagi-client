@@ -24,7 +24,7 @@
 	var ch = hitagiCreate(serverIp, 8080);
 
 </script>	
-<script type="text/javascript" src="js/chatcore.js?<?= time(); ?>"></script>
+<script type="text/javascript" src="jscore.php?1"></script>
 </head>
 <body>
 <div id="head">
