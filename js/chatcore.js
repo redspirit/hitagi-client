@@ -1,4 +1,4 @@
-var states = [], statesT = [], privas = [], privasS = [], privasT = [], umItems = [];
+var states = [], statesT = [], privas = [], privasT = [], umItems = [];
 var blockOverlay = true, clickOnProf = 0, autoScroll = true;
 var soundEnable, notifEnable, playSound, imaga, blockHide = true;
 var imageReader = new FileReader();
@@ -17,7 +17,7 @@ function start(){
 	initToolButtons();
 	if(!ch.connect()){
 		showForm(tpl('conerror'), 'Ошибочка');
-	}
+	}	
 };
 
 function createElements(){
@@ -25,7 +25,7 @@ function createElements(){
 	for (var i = 0; i < statesT.length; ++i){
 		$('#tmenu').append(tpl('statusitem', {s1:states[i], s2:statesT[i], n:i}));
 	}
-
+	
 	$('#widget-help').widget({
 		hideCloseBtn:true,
 		title:'Правила чата',
@@ -130,9 +130,9 @@ function bindings(){
 	});	
 	for(var i in smiles[1]){
 		$('#smWrap').append('<img num="'+smiles[1][i]+'" src="img/smiles/'+smiles[1][i]+'.gif" alt="" />');
-	}
-
-
+	}	
+	
+	
 }
 
 
@@ -401,7 +401,17 @@ $('.profava').live('click', function(){
 		$('#messageinput').val($('#messageinput').val()+nn+': ').focus();
 	}
 });
-
+$('.close-form img').live('click', function(){
+	hideForm();
+});
+$('input[fastaction]').live('keydown', function(e){
+	if(e.keyCode==13){
+		var elemId = $(this).attr('fastaction');
+		$('#'+elemId).trigger('click');
+	}
+});	
+	
+	
 	
 /********** INTERFACE EVENTS ************/
 
@@ -638,13 +648,14 @@ function tpl(tname, variables){
 }
 function showForm(s,capt, top){
 	if(!isset(top)) top='200px';
-	$('#alert').html('<h1>'+capt+'</h1> '+s).css('top', top).show();
+	$('#alert').html('<div class="close-form"><img title="Закрыть" src="img/close-form.png" alt="" /></div><h1>'+capt+'</h1> '+s).css('top', top).show();
 	$('#overlay').show();
 }
 function hideForm(){
 	if(blockOverlay) return false;
 	$('#alert').hide();
 	$('#overlay').hide();
+	$('#messageinput').focus();
 }
 function uplAvatar(file){
 	if (!file.type.match(/image.*/)) return true;
@@ -876,7 +887,7 @@ function messageAfterProc(s){
 			s.text = tpl('image', {url1:c, url2:b});
 		});
 	} else {
-		s.text = s.text.replace(RegExp('(https?://)([-a-zA-Zа-яА-Я0-9@:;%!_\+.,~#?&//=]+)', 'gi'),function(link){
+		s.text = s.text.replace(RegExp('(https?://)([-a-zA-Zа-яА-Я0-9@:;%!_\+.,~#?&//=/(/)]+)', 'gi'),function(link){
 			var m=link.match(RegExp('(http://(www.)?youtube.com/)|(\.(jpg|jpeg|gif|png)$)', 'i'));
 			if(!m){
 				return '<a href="'+link+'" target="_blank">'+link+'</a>';
@@ -926,7 +937,7 @@ function messageAfterProc(s){
 /********** TEMPLATES ************/
 var templates = {
 	setava: '<div><img id="newavaimg" src="{src}" alt="" /></div><div><input type="file" name="files" id="inputfile" /></div><div id="avalabel">Выберите файл с картинкой. GIF анимироваться не будет</div>',
-	status: '<div><input type="text" id="newstatustext" style="width:400px;" value="" /></div><input type="button" id="status_but" class="btn" value="Изменить" />',
+	status: '<div><input type="text" id="newstatustext" style="width:400px;" value="" fastaction="status_but" /></div><input type="button" id="status_but" class="btn" value="Изменить" />',
 	modmenu: '<div class="moditem" val="1">Список забаненых</div><div class="moditem" val="2">Зарегать юзера</div><div class="moditem" val="3">Топик комнаты</div>',
 	topic: '<div><textarea style="width:300px; height:80px;" id="topictext">{txt}</textarea></div><input type="button" id="topic_but" class="btn" value="Изменить" />',
 	auth: '<div>Логин: <input type="text" id="auth_login" /></div><div>Пароль: <input type="password" id="auth_pass" /></div><div><input type="button" id="auth_but" class="btn" value="Войти" /></div><div align="center"><div id="vk_auth"></div></div><a id="reglink" href="#">Регистрация</a>',
@@ -952,7 +963,7 @@ var templates = {
 }
 
 var smiles = {
-	1:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104],
+	1:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124],
 	5:[501,502,503,504,505,506,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,534,535,536,537,538],
 	3:[601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,631,632,633,634],
 	4:[700,701,702,703,704,705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,736,737,738,739,740,741,742,743,744,745,746,747,748,749,750,751,752,753,754,755,756,757,758,759,760,761,762,763,764,765,766,767,768,769,780,781,782,783,784,785,786,787,788,789,790,791,792,793],

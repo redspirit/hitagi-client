@@ -28,13 +28,24 @@ td{
 	text-indent: -9999px;
 	display: block;
 	background: url(../img/logo.png);
-	width: 520px;
+	width: 397px;
 	height: 80px;
 	position:absolute;
 	left:50%;
 	margin-left:-479px;
 	top:5px;
 }
+#usefullinks{
+	position: absolute;
+	left: 50%;
+	width: 250px;
+	top: 10px;
+}
+#usefullinks li a{
+	color: white;
+	font-size:14px;
+}
+
 #auth{
 	position:absolute;
 	left:50%;
@@ -389,6 +400,11 @@ dd span.label{
 }
 #alert input[type=text], #alert input[type=password]{
 	padding:2px;
+}
+#alert .close-form{
+	float:right;
+	margin:0;
+	cursor:pointer;
 }
 #overlay{
 	position: fixed;
