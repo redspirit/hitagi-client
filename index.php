@@ -53,7 +53,6 @@
 			<li id="smileBtn">
 
 			</li>
-			<li id="stateBtn" title="Изменить статус"></li>
 			<li id="statusBtn" title="Изменить статусный текст"></li>
 			<li id="colorsBtn" title="Цвет сообщения"></li>
 			<li id="soundBtn" title="Включить / выключить звук"></li>

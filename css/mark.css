@@ -133,7 +133,8 @@ ul {
 	background: url('../img/status.png') no-repeat center center;
 }
 #stateBtn{
-	background: url('../img/online.png') no-repeat center center;
+	cursor: pointer;
+    position: relative;
 }
 #colorsBtn{
 	background: url('../img/colors.png') no-repeat center center;
@@ -407,10 +408,6 @@ dd span.label{
 	cursor: default;
 	background-color:white;
 	font-size:12px;
-	right: 0;
-	bottom: 0;
-	margin-right: 70px;
-	margin-bottom: 28px;	
 }
 #modmenu{
 	display:none;
@@ -445,7 +442,7 @@ dd span.label{
 }
 .statetxt{
 	display: inline-block;
-    width: 120px;
+    width: 100px;
     color: #767676;
     font-size: 90%;
 }

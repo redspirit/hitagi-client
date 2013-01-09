@@ -17,7 +17,7 @@ function start(){
 	initToolButtons();
 	if(!ch.connect()){
 		showForm(tpl('conerror'), 'Ошибочка');
-	}	
+	}
 };
 
 function createElements(){
@@ -25,7 +25,7 @@ function createElements(){
 	for (var i = 0; i < statesT.length; ++i){
 		$('#tmenu').append(tpl('statusitem', {s1:states[i], s2:statesT[i], n:i}));
 	}
-	
+
 	$('#widget-help').widget({
 		hideCloseBtn:true,
 		title:'Правила чата',
@@ -106,7 +106,7 @@ function bindings(){
 	$('#uploadImage').click(clickUploadimage);
 	$('#statusBtn').click(clickStatusbtn);
 	$('#moderBtn').click(clickModerBut);
-	$('#stateBtn').click(clickStatebtn)
+	$('#stateBtn').live('click', clickStatebtn);
 	$('#tmenu').click(clickStatebtn2).mouseleave(clickStatebtn2);
 	$('#soundBtn').click(clickSoundbtn);
 	$('#notifBtn').click(clickNotifbtn);
@@ -130,9 +130,9 @@ function bindings(){
 	});	
 	for(var i in smiles[1]){
 		$('#smWrap').append('<img num="'+smiles[1][i]+'" src="img/smiles/'+smiles[1][i]+'.gif" alt="" />');
-	}	
-	
-	
+	}
+
+
 }
 
 
@@ -481,7 +481,15 @@ function topicChange(){
 	});
 }
 function clickStatebtn(){
-	$('#tmenu').show();
+    var offset = $('#stateBtn').offset(),
+        offset_top = offset.top + 20,
+        targetOffset = $('#tmenu').offset();
+
+    if (offset_top != targetOffset.top) {
+        $('#tmenu').css({top: offset_top, left: offset.left - 20});
+    }
+
+    $('#tmenu').show();
 }
 function clickStatebtn2(){
 	$('#tmenu').hide();
@@ -744,13 +752,17 @@ function toBottom(){
 	if(autoScroll) pan.scrollTop = pan.scrollHeight;
 }
 function getUserItemHTML(name, nick, avaurl, status, priv, state){
-    var usericon = '';
+    var usericon = '', stateBtn = '';
 
     if ('' != privas[priv]) {
-        usericon = '<img class="usericon" src="img/' + privas[priv] +'" alt="" title="" />';
+        usericon = '<img class="usericon" src="img/' + privas[priv] +'" alt="' + privasS[priv] + '" title="' + privasS[priv] + '" />';
     }
 
-	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privasS[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state], usericon: usericon});
+    if (user.login == name) {
+        stateBtn = 'id="stateBtn"';
+    }
+
+	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privasS[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state], usericon: usericon, stateBtn: stateBtn});
 }
 function addUser(name, uobj){
 	$('.roster-pane').append(getUserItemHTML(name, uobj['nick'], uobj['avaurl'], uobj['statustext'], uobj['commonPriv'], uobj['state']));
@@ -930,7 +942,7 @@ var templates = {
 	kickmes: '<div style="text-align:center;margin:20px 100px"><img src="img/kick.jpg" alt="" /><p>Уважаемый пользователь, Вас выпнули (кикнули) из этой комнаты. Это сделал модератор у которого, скорее всего, были для этого веские причины.</p><p><b>НАПОМИНАЕМ ВАМ о <a target="_blank" href="http://anime-storage.ru/index.php?topic=544.0">ПРАВИЛАХ</a> чата!</b></p><p>Если Ваше отношение к чату и его пользователям не изменится в лучшую сторону, то дело может дойти акта банного изгнания.</p></div>',
 	banmes: '<div style="text-align:center;margin:20px 100px"><img src="img/banned.jpg" alt="" /> <p><b>Вы забанены в этой комнате на {time} мин. {reason}</b></p><p>Вы себя вели настолько неуважительно к чату и его пользователям, что теперь читаете эти строки без права зайти в комнату еще {time} мин. Какого хрена? Будет время - <a target="_blank" href="http://anime-storage.ru/index.php?topic=544.0">почитайте правила</a>, они очень простые и основаны на самом обычном взаимном уважении между людьми. Если вы принципиально считаете себя выше всех, то лучше сюда не возвращаться.</p></div>',
 	blockmes: '<div style="text-align:center;margin:20px 100px"><img src="img/blocked.jpg" alt="" /> <p><b>Вы заблокированы, причина блокировки: "{mess}"</b></p></div>',
-	useritem: '<table user="{name}" class="user"><tr><td rowspan="2" scope="col" class="cc1">{usericon}<img class="profava" src="{url}" alt="" nn={n} /></td><td scope="col" style="padding-top:6px"></td></tr><tr><td class="cc2"><img class="stateSign" src="img/{states}" alt="{statest}" title="{statest}" /><div class="profnick {p}" title="Юзер: {name}">{n}</div><div class="clear"></div><div class="statetxt">{st}</div><div class="clear"></div></td></tr><tr><td colspan="2" class="cc3"><div class="usmenu" priv="{priv}">Действия</div></td></tr></table>',
+	useritem: '<table user="{name}" class="user"><tr><td rowspan="2" scope="col" class="cc1">{usericon}<img class="profava" src="{url}" alt="" nn={n} /></td><td scope="col" style="padding-top:6px"></td></tr><tr><td class="cc2"><img class="stateSign" {stateBtn} src="img/{states}" alt="{statest}" title="{statest}" />{tmenu}<div class="profnick {p}" title="Юзер: {name}">{n}</div><div class="clear"></div><div class="statetxt">{st}</div><div class="clear"></div></td></tr><tr><td colspan="2" class="cc3"><div class="usmenu" priv="{priv}">Действия</div></td></tr></table>',
 	image: '<div class="imgcont"><a target="_blank" href="{url2}"><img class="inlinepic" src="{url1}" alt="" /></a><div class="imgpanel"><img title="Мне не нравится" class="imgcontol iDislike" src="img/dislikeimg.png" alt="" /><img title="Закрыть картинку" class="imgcontol iClose" src="img/closeimg.png" alt="" /><img title="Мне нравится" class="imgcontol iLike" src="img/likeimg.png" alt="" /></div></div>',
 	vrnotif: 'Регистрация прошла успешно, теперь просто залогинтесь через ВК',
 	simpimage: '<a target="_blank" href="{url2}"><img class="inlinepic" src="{url1}" alt="" /></a>',
@@ -965,10 +977,10 @@ states[12] = 'read.png';		statesT[12] = 'Читаю';
 states[13] = 'sleep.png';		statesT[13] = 'Сплю';
 
 privas[1] = 'admin.png'; 		privasS[1] = 'admin';       privasT[1] = 'Админ';
-privas[2] = 'moder.png'; 		privasS[1] = 'moder';       privasT[2] = 'Модератор';
-privas[3] = 'owner.png'; 		privasS[1] = 'owner';       privasT[3] = 'Хозяин комнаты';
-privas[4] = ''; 	            privasS[1] = 'user';        privasT[4] = 'Пользователь';
-privas[5] = 'novoice.png';		privasS[1] = 'novoice';     privasT[5] = 'Без голоса';
+privas[2] = 'moder.png'; 		privasS[2] = 'moder';       privasT[2] = 'Модератор';
+privas[3] = 'owner.png'; 		privasS[3] = 'owner';       privasT[3] = 'Хозяин комнаты';
+privas[4] = ''; 	            privasS[4] = '';            privasT[4] = 'Пользователь';
+privas[5] = 'novoice.png';		privasS[5] = 'novoice';     privasT[5] = 'Без голоса';
 
 umItems[1] = 'Сделать админом';
 umItems[2] = 'Разжаловать админа';
