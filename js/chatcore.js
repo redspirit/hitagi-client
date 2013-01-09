@@ -1,4 +1,4 @@
-var states = [], statesT = [], privas = [], privasT = [], umItems = [];
+var states = [], statesT = [], privas = [], privasS = [], privasT = [], umItems = [];
 var blockOverlay = true, clickOnProf = 0, autoScroll = true;
 var soundEnable, notifEnable, playSound, imaga, blockHide = true;
 var imageReader = new FileReader();
