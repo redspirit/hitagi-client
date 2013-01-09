@@ -31,6 +31,13 @@
 	<div id="logo">
 		<h1><a target="_blank" href="/">Аниме чат</a></h1>
   	</div>
+	<div id="usefullinks">
+		<ul>
+			<li><a target="_blank" href="https://github.com/redspirit/hitagi-client/wiki/%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9">Лог изменений</a></li>
+			<li><a target="_blank" href="http://hitagi.reformal.ru/">Предложения и пожелания</a></li>
+			<li><a target="_blank" href="https://github.com/redspirit/hitagi-client">Репозиторий</a></li>
+		</ul>
+	</div>
 	<div id="auth">
 	<p id="hello">Незалогинен</p>
 	<table width="100%">

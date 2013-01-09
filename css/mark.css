@@ -35,6 +35,17 @@ td{
 	margin-left:-479px;
 	top:5px;
 }
+#usefullinks{
+	position: absolute;
+	left: 50%;
+	width: 250px;
+	top: 10px;
+}
+#usefullinks li a{
+	color: white;
+	font-size:14px;
+}
+
 #auth{
 	position:absolute;
 	left:50%;
