@@ -1,1 +1,19 @@
-<table user="{name}" class="user"><tr><td rowspan="2" scope="col" class="cc1"><img class="profava" src="{url}" alt="" nn={n} /></td><td scope="col" style="padding-top:6px"><img class="stateSign" src="img/{states}" alt="" /> <div class="statetxt">{statest}</div></td></tr><tr><td class="cc2"><img class="upriv" title="{pt}" src="img/{p}" alt="" /> <div class="usmenu" priv="{priv}"></div></td></tr><tr><td colspan="2" class="cc3"><div class="profnick" title="Юзер: {name}">{n}</div><div class="ustatus">{st}</div></td></tr></table>
+<table user="{name}" class="user">
+    <tr>
+        <td rowspan="2" scope="col" class="cc1">{usericon}<img class="profava" src="{url}" alt="" nn={n}/></td>
+        <td scope="col" style="padding-top:6px"></td>
+    </tr>
+    <tr>
+        <td class="cc2"><img class="stateSign" {stateBtn} src="img/{states}" alt="{statest}" title="{statest}" />{tmenu}
+            <div class="profnick {p}" title="Юзер: {name}">{n}</div>
+            <div class="clear"></div>
+            <div class="statetxt">{st}</div>
+            <div class="clear"></div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="cc3">
+            <div class="usmenu" priv="{priv}">Действия</div>
+        </td>
+    </tr>
+</table>
