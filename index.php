@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Hitagi Chat</title>
+<title>Аниме чат Hitagi</title>
 	<link rel="stylesheet" type="text/css" href="css/mark.css?<?= time() ?>" />
 	<link rel="stylesheet" media="screen" type="text/css" href="js/colorpicker/css/colorpicker.css" />
 <!--	<script src="http://<?= $serverip ?>:8080/socket.io/socket.io.js"></script> -->
@@ -29,7 +29,7 @@
 <body>
 <div id="head">
 	<div id="logo">
-		<h1><a target="_blank" href="/">Аниме аватарки</a></h1>
+		<h1><a target="_blank" href="/">Аниме чат</a></h1>
   	</div>
 	<div id="auth">
 	<p id="hello">Незалогинен</p>
