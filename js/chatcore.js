@@ -1,4 +1,4 @@
-var states = [], statesT = [], privas = [], privasT = [], umItems = [];
+var states = [], statesT = [], privas = [], privasS = [], privasT = [], umItems = [];
 var blockOverlay = true, clickOnProf = 0, autoScroll = true;
 var soundEnable, notifEnable, playSound, imaga, blockHide = true;
 var imageReader = new FileReader();
@@ -106,7 +106,7 @@ function bindings(){
 	$('#uploadImage').click(clickUploadimage);
 	$('#statusBtn').click(clickStatusbtn);
 	$('#moderBtn').click(clickModerBut);
-	$('#stateBtn').click(clickStatebtn)
+	$('#stateBtn').live('click', clickStatebtn);
 	$('#tmenu').click(clickStatebtn2).mouseleave(clickStatebtn2);
 	$('#soundBtn').click(clickSoundbtn);
 	$('#notifBtn').click(clickNotifbtn);
@@ -280,7 +280,7 @@ ch.response.onEraseMessage = function(err, d){
 }
 ch.response.onSetStatus = function(err, d){
 	if(!err){
-		$('.roster-pane table[user='+d.user+'] .ustatus').text(d.text);
+        $('.roster-pane table[user='+d.user+'] .statetxt').html(d.text);
 		addNotif('<b>'+d.nick+'</b> изменил статусный текст на: <b>' + d.text + '</b>', '#0F419B');
 		hideForm();
 	} else {
@@ -290,7 +290,6 @@ ch.response.onSetStatus = function(err, d){
 ch.response.onSetState = function(err, d){
 	if(!err){
 		$('.roster-pane table[user='+d.user+'] .stateSign').attr('src', 'img/'+states[d.val]);
-		$('.roster-pane table[user='+d.user+'] .statetxt').html(statesT[d.val]);		
 		if(d.user == user.login)$('#stateBtn').css('backgroundImage', 'url(img/'+states[d.val]+')');
 		addNotif('<b>'+d.nick+'</b> изменил статус на: <b>' + statesT[d.val] + '</b>', '#0F419B');
 	} else {
@@ -492,7 +491,15 @@ function topicChange(){
 	});
 }
 function clickStatebtn(){
-	$('#tmenu').show();
+    var offset = $('#stateBtn').offset(),
+        offset_top = offset.top + 20,
+        targetOffset = $('#tmenu').offset();
+
+    if (offset_top != targetOffset.top) {
+        $('#tmenu').css({top: offset_top, left: offset.left - 20});
+    }
+
+    $('#tmenu').show();
 }
 function clickStatebtn2(){
 	$('#tmenu').hide();
@@ -756,7 +763,17 @@ function toBottom(){
 	if(autoScroll) pan.scrollTop = pan.scrollHeight;
 }
 function getUserItemHTML(name, nick, avaurl, status, priv, state){
-	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privas[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state]});
+    var usericon = '', stateBtn = '';
+
+    if ('' != privas[priv]) {
+        usericon = '<img class="usericon" src="img/' + privas[priv] +'" alt="' + privasS[priv] + '" title="' + privasS[priv] + '" />';
+    }
+
+    if (user.login == name) {
+        stateBtn = 'id="stateBtn"';
+    }
+
+	return tpl('useritem', {name:name, url:avaurl, pt:privasT[priv], p:privasS[priv], priv:priv, n:nick, st:status, states:states[state], statest:statesT[state], usericon: usericon, stateBtn: stateBtn});
 }
 function addUser(name, uobj){
 	$('.roster-pane').append(getUserItemHTML(name, uobj['nick'], uobj['avaurl'], uobj['statustext'], uobj['commonPriv'], uobj['state']));
@@ -944,11 +961,11 @@ states[11] = 'home.png';		statesT[11] = 'Дела по дому';
 states[12] = 'read.png';		statesT[12] = 'Читаю';
 states[13] = 'sleep.png';		statesT[13] = 'Сплю';
 
-privas[1] = 'admin.png'; 		privasT[1] = 'Админ'; 
-privas[2] = 'moder.png'; 		privasT[2] = 'Модератор';
-privas[3] = 'owner.png'; 		privasT[3] = 'Хозяин комнаты'; 
-privas[4] = 'user.png'; 		privasT[4] = 'Пользователь'; 
-privas[5] = 'novoice.png';		privasT[5] = 'Без голоса';
+privas[1] = 'admin.png'; 		privasS[1] = 'admin';       privasT[1] = 'Админ';
+privas[2] = 'moder.png'; 		privasS[2] = 'moder';       privasT[2] = 'Модератор';
+privas[3] = 'owner.png'; 		privasS[3] = 'owner';       privasT[3] = 'Хозяин комнаты';
+privas[4] = ''; 	            privasS[4] = '';            privasT[4] = 'Пользователь';
+privas[5] = 'novoice.png';		privasS[5] = 'novoice';     privasT[5] = 'Без голоса';
 
 umItems[1] = 'Сделать админом';
 umItems[2] = 'Разжаловать админа';
