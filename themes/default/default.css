@@ -17,7 +17,7 @@ td{
 	top:0;
 	left:0;
 	right: 0;	
-	background: #164870 url(../img/body.jpg) no-repeat top center;
+	background: #164870 url(body.jpg) no-repeat top center;
 	height: 85px;
 }
 #logo h1{
@@ -27,7 +27,7 @@ td{
 #logo h1 a{
 	text-indent: -9999px;
 	display: block;
-	background: url(../img/logo.png);
+	background: url(logo.png);
 	width: 397px;
 	height: 80px;
 	position:absolute;
@@ -54,7 +54,7 @@ td{
 	width: 230px;
 	height: 67px;
 	padding: 6px;
-	background: #FFF url(../img/sidebar.png) repeat-x;
+	background: #FFF url(sidebar.png) repeat-x;
 	border-radius: 0 0 5px 5px;
 	-moz-border-radius: 0 0 5px 5px;
 	-webkit-border-radius: 0 0 5px 5px;
@@ -74,7 +74,7 @@ td{
 	bottom: 0;
 	right: 0;
 	left: 0;
-	background-image: url(../img/bg.png);
+	background-image: url(bg.png);
 	color: #333;
 	overflow: hidden;
 }
@@ -141,23 +141,23 @@ ul {
 	margin-top: 2px;
 }
 #statusBtn{
-	background: url('../img/status.png') no-repeat center center;
+	background: url('../../img/status.png') no-repeat center center;
 }
 #stateBtn{
 	cursor: pointer;
     position: relative;
 }
 #colorsBtn{
-	background: url('../img/colors.png') no-repeat center center;
+	background: url('../../img/colors.png') no-repeat center center;
 }
 #smileBtn{
-	background: url('../img/smile.png') no-repeat center center;
+	background: url('../../img/smile.png') no-repeat center center;
 }
 #toolBtn{
-	background: url('../img/toolsuser.png') no-repeat center center;
+	background: url('../../img/toolsuser.png') no-repeat center center;
 }
 #moderBtn{
-	background: url('../img/modermenu.png') no-repeat center center;
+	background: url('../../img/modermenu.png') no-repeat center center;
 	display:none;
 }
 #soundBtn, #notifBtn{
@@ -171,7 +171,7 @@ ul {
 	bottom: 0;
 	width: 220px;
 	margin: 30px 0 32px 0;
-	background: url(../img/fonu1.png) no-repeat bottom right, url(../img/bg2.png);
+	background: url(fonu1.png) no-repeat bottom right, url(bg2.png);
 	border-top: 1px solid #C5C5C5;
 }
 .roster-pane .user {
@@ -199,7 +199,7 @@ ul {
 	height: auto;
 	width: auto;
 	margin: 30px 220px 32px 0;
-	background: url(../img/fon8.png) no-repeat bottom right;
+	background: url(fonimg.png) no-repeat bottom right;
 	border-top: 1px solid #C5C5C5;
 }
 .message-pane {
@@ -255,7 +255,7 @@ ul {
 	height:20px;
 	border: 0;
 	cursor:pointer;
-	background: url('../img/more.png') no-repeat center center;
+	background: url('../../img/more.png') no-repeat center center;
 }
 .message-pane dt {
 	float: left;
@@ -467,7 +467,7 @@ dd span.label{
 	font-size: 11px;
 }
 .usmenu{
-	background: url('../img/menu.png') no-repeat 90% -2px;
+	background: url('../../img/menu.png') no-repeat 90% -2px;
 	cursor:pointer;
     font-weight: bold;
     border-radius: 5px;

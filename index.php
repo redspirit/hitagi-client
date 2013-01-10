@@ -1,19 +1,28 @@
 <?php
 	include('config.php');
 	setcookie("chat", 'chat', time()+(3600*24*366), '/');
+	
+	if($_GET['theme']=='dark'){
+		$style = 'dark/dark.css';	
+	} else {
+		$style = 'default/default.css';		
+	}
+	
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <title>Аниме чат Hitagi</title>
-	<link rel="stylesheet" type="text/css" href="css/mark.css?<?= time() ?>" />
+	<link rel="stylesheet" type="text/css" href="themes/jquery.jscrollpane.css" />
+	<link rel="stylesheet" type="text/css" href="themes/<?= $style ?>" />
 	<link rel="stylesheet" media="screen" type="text/css" href="js/colorpicker/css/colorpicker.css" />
 <!--	<script src="http://<?= $serverip ?>:8080/socket.io/socket.io.js"></script> -->
 	<script type="text/javascript" src="js/socket.io.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/hitagi.js"></script>
 	<script type="text/javascript" src="js/tools.js"></script>
+	<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>	
 	<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?1"></script>
 	
 <script type="text/javascript">

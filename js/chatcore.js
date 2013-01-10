@@ -43,6 +43,8 @@ function createElements(){
 		content:tpl('radiocode')
 	});
 	
+	$('.message-pane').jScrollPane();
+	
 }
 
 function initSounds(){
